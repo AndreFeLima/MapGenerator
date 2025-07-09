@@ -8,19 +8,21 @@ struct Color {
 
 class Paleta {
     int size;
-    Color colors[100];
-    int hights[100];
+    Color *colors;
+    int *heights;
+
 
     public:
-    Paleta () {};
+    Paleta (int size, Color color[100], int height [100] = {0});
+    Paleta ();
+    ~Paleta (); //Destrutor
 
-    int get_size () {};
-    Color get_color (int i) {};
-    int get_hight (int i) {};
-    int get_color_by_hight (int hight) {};
-    int get_from_arquive (std::string arquive) {};
+    Color get_color_by_height (int height);
+
+    void set_by_archive (std::string arquive);
     
 };
+
 
 
 
