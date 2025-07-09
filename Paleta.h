@@ -1,5 +1,6 @@
 #ifndef __PALETA
 #define __PALETA
+#include <string>
 
 struct Color {
     int R, G, B;
