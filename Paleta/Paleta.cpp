@@ -9,13 +9,13 @@ ESTUDO DAS CORES:
 
 #include <iostream>
 #include <fstream> 
-#include "Paleta_funccions.h"
+#include "Paleta.h"
 
 
 
 Paleta::Paleta (int size, Color color[100],int height [100] = {0}){
         this -> size = size;
-        this -> colors = new Color [ this -> size];  //Estou 
+        this -> colors = new Color [ this -> size];  
         this -> heights = new int [ this -> size];
 
         for (int i = 0; i<size; i++) {
@@ -42,8 +42,8 @@ Color Paleta::get_color_by_height (int height) {
 
     // PARA ARQUIVOS
 
-void Paleta::set_by_archive (std::string arquive) {
-    std::ifstream arquivo (arquive);
+void Paleta::set_by_archive (std::string archive) {
+    std::ifstream arquivo (archive);
     if (arquivo.is_open()) {
         arquivo >> this -> size;
             
