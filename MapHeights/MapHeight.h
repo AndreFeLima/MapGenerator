@@ -59,6 +59,10 @@ void save_map (std::string archive);
 
 ImagePPM map_image (Paleta paleta);
 
+ImagePPM paint (Paleta paleta);
+
+ImagePPM darken();
+
 };
 
 #endif

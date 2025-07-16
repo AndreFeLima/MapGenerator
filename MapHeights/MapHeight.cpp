@@ -215,7 +215,13 @@ if (arquivo.is_open()) {
 
 }
 }
+ImagePPM Map::paint (Paleta paleta) {
 
+}
+
+ImagePPM Map::darken() {
+
+}
 
 
 

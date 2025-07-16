@@ -11,7 +11,7 @@
 #define __IMAGEPPM
 
 #include <string>
-#include "Paleta.h"
+#include "../Paleta/Paleta.cpp" //Acessa pastas diferentes
 
 class ImagePPM {
 int   width;          // número de colunas
