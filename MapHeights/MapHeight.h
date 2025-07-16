@@ -20,6 +20,11 @@
 #define __Map
 
 #include <string>
+#include <fstream>
+#include <cstdlib>
+#include <ctime>
+#include "../Paleta/Paleta.cpp"
+#include "../Image/ImagePPM.cpp"
 
 class Map {
 int side;
@@ -30,25 +35,29 @@ public:
 
 //CONSTRUTORES
 Map ();             
-Map (int side, int seed);
+Map (int side);
 
 //DESTRUTOR
 ~Map();
 
 //FUNCOES PARA MUDANCA
-void set_width_length(int width, int lenght);
-void set_heights ( int heights[]);
+void set_side(int side);
+void set_map_from_archive (std::string archive);
 
 //FUNCOES PARA PRINTAR
 int get_side ();
 int get_height (int line, int column);
 
 //FUNCAO DIAMOND-SQUARE 
-void diamond_square (int side, int roughness, int *heights);
+void diamond (int *heights, int roughness, int d, int map_side);
+void square (int *heights, int roughness, int d, int map_side);
+void diamond_square ();
 
 
 //SALVAR  MAPA EM ARQUIVO
 void save_map (std::string archive);
+
+ImagePPM map_image (Paleta paleta);
 
 };
 
