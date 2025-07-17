@@ -1,21 +1,3 @@
-/*
-    FAZER TERRENO COM 2^n +1;
-
-    GERAR NUMERO ALEATORIO:
-    #include <cstdlib>
-    #include <ctime>
-
-    strand () -> define a sementre inicial
-    rand () -> gera um numero aleatorio entre 0 e o maior inteiro possível;
-    srand(time{0}); COMECAR UTILIZANDO UM VALOR QUE SEI!!
-
-    int n1 = rand();
-    int n2 = rand();
-
-    int max, min;
-    int rnd = (rand()%(max-min + 1)) + min;
-    */
-
 #ifndef __Map
 #define __Map
 
@@ -23,8 +5,8 @@
 #include <fstream>
 #include <cstdlib>
 #include <ctime>
-#include "../Paleta/Paleta.cpp"
-#include "../Image/ImagePPM.cpp"
+#include "Paleta.h"
+#include "ImagePPM.h"
 
 class Map {
 int side;
@@ -57,11 +39,11 @@ void diamond_square ();
 //SALVAR  MAPA EM ARQUIVO
 void save_map (std::string archive);
 
-ImagePPM map_image (Paleta paleta);
+void map_image (std::string paleta);
 
-ImagePPM paint (Paleta paleta);
+void paint (std::string paleta);
 
-ImagePPM darken();
+void darken();
 
 };
 

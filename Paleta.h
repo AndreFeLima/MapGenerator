@@ -14,7 +14,7 @@ class Paleta {
 
 
     public:
-    Paleta (int size, Color color[100], int height [100] = {0});
+    Paleta (int size, Color *color, int *height );
     Paleta ();
     ~Paleta (); //Destrutor
 
@@ -23,13 +23,5 @@ class Paleta {
     void set_by_archive (std::string arquive);
     
 };
-
-
-
-
-
-
-
-
 
 #endif

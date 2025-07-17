@@ -13,7 +13,7 @@ ESTUDO DAS CORES:
 
 
 
-Paleta::Paleta (int size, Color color[100],int height [100] = {0}){
+Paleta::Paleta (int size, Color *color, int *height){
         this -> size = size;
         this -> colors = new Color [ this -> size];  
         this -> heights = new int [ this -> size];
@@ -25,20 +25,27 @@ Paleta::Paleta (int size, Color color[100],int height [100] = {0}){
     }
     
 Paleta::Paleta () {
-        size = 1;
+        size = 100;
         colors = new Color [ this -> size];
-        colors [0] = {0,0,0};
         heights = new int [ this -> size];
-        heights [0] = 0; 
+
     }
 
+Paleta::~Paleta () {
+    delete[] this->colors;
+    delete[] this->heights;
 
+    this->colors = nullptr;
+    this->heights = nullptr;
+}
 
 Color Paleta::get_color_by_height (int height) {
         for (int i = 0; i<size; i++) {
             if ( this -> heights[i] <= height && this -> heights[i + 1] > height) {return this -> colors[i];}
-            else {return this -> colors[i+1];}
-        }}
+
+        }
+        return colors[0];
+    }
 
 
     // PARA ARQUIVOS

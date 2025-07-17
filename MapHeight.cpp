@@ -173,17 +173,17 @@ void Map::diamond_square () {
 
     srand(time(NULL));
 
-    this -> heights [0] = get_random (1000); 
+    this -> heights [0] = get_random (100); 
 
     this -> heights [(side-1)] = get_random (100);
     
     this -> heights [(side-1)*(side)] = get_random (100);
 
-    this -> heights [(side-1)*(side) + (side-1)] = get_random (1000);
+    this -> heights [(side-1)*(side) + (side-1)] = get_random (100);
 
     int d = side - 1;
 
-    int roughness = (rand () % (100));
+    int roughness = (rand () % (10));
 
     while ( d > 1) {
         
@@ -215,20 +215,51 @@ if (arquivo.is_open()) {
 
 }
 }
-ImagePPM Map::paint (Paleta paleta) {
+void Map::paint (std::string paleta) {
+    ImagePPM image (side, side);
+    Paleta colors;
+
+    colors.set_by_archive (paleta);
+
+    for (int i = 0; i<(side*side); i++) {
+        Color color;
+        
+        color = colors.get_color_by_height (heights[i]);
+
+        std::cout << color.R << ' '
+                << color.G << ' '
+                << color.B << ' '
+                << std::endl;
+
+        image.set_pixel (i%(side*side), i/(side*side), color);
+    }
+
+    image.save ("image.ppm");
+}
+
+void Map::darken() {
 
 }
 
-ImagePPM Map::darken() {
-
-}
 
 
-
-ImagePPM Map::map_image (Paleta paleta) {
+void Map::map_image (std::string paleta) {
 
     for (int i = 0; i<side*side; i++) {
         
     }
+
+}
+
+
+int main () {
+
+Map map (2); 
+
+map.diamond_square ();
+
+map.save_map ("Map.txt");
+
+map.paint ("Data.txt");
 
 }
