@@ -6,6 +6,7 @@
 int main () {
     std::string file;
 
+    // "Palet.txt"
     std::cout << "Digite o nome do arquivo da paleta: ";
     std::cin >> file;
 
@@ -16,11 +17,12 @@ int main () {
     Map map (side);
 
     int roughness;
-    std::cout << "\nDigite a rugosidade (Recomendado: 500): ";
+    std::cout << "\nDigite a rugosidade (Recomendado: <500): ";
     std::cin >> roughness;
 
     map.diamond_square (roughness);
 
+    //Map.txt
     map.paint (file);
 
     std::cout << "\nSeu mapa está pronto! Abra o arquivo .PPM para vizualizá-lo";
