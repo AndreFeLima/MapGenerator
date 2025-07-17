@@ -17,7 +17,7 @@
 
     COMENTAR CADA METODOD (FUNCAO) (/** COMECAR  COM ESSE, AO INVES DE SO /*
     @param (nome do arquivo) >> EXPLICAR OQUE EH
-    @return >> DIZER OQ RETORNA  
+    @return >> DIZER OQ RETORNA
 
     */
 
@@ -42,7 +42,7 @@ int map_side (int n) {
     } 
     return (num + 1);}
 
-void Map::diamond (int *heights, int roughness, int d, int map_side) {
+void Map::diamond (int *heights, int &roughness, int d, int map_side) {
 
     for (int r = 0; r < map_side - d; r += d ) {
         for (int c = 0; c < map_side - d; c += d) {
@@ -70,7 +70,7 @@ void Map::diamond (int *heights, int roughness, int d, int map_side) {
     }
     }
 
-void Map::square (int *heights, int roughness, int d, int map_side) {
+void Map::square (int *heights, int &roughness, int d, int map_side) {
     int temp_d = d/2;
 
     for (int r = 0; r < map_side; r += temp_d) {
@@ -169,7 +169,7 @@ void Map::set_map_from_archive (std::string archive) {
 
 
 //DIAMOND-SQUARE 
-void Map::diamond_square () {
+void Map::diamond_square (int roughness) {
 
     srand(time(NULL));
 
@@ -183,12 +183,6 @@ void Map::diamond_square () {
 
     H4 = get_random (1000);
 
-    if (H1 <= 0 & H2 <= 0 & H3<=0 & H4<=0) {
-        H3 = 48;
-
-        H1 = 100;
-    }
-
     this -> heights [0] = H1; 
 
     this -> heights [(side-1)] = H2;
@@ -198,8 +192,6 @@ void Map::diamond_square () {
     this -> heights [(side-1)*(side) + (side-1)] = H4;
 
     int d = side - 1;
-
-    int roughness = (rand () % (600));
 
     while ( d > 1) {
         
@@ -258,23 +250,14 @@ void Map::paint (std::string paleta) {
 
 
 
-void Map::map_image (std::string paleta) {
-
-    for (int i = 0; i<side*side; i++) {
-        
-    }
-
-}
-
-
 int main () {
 
 Map map (10); 
 
-map.diamond_square ();
+map.diamond_square (500);
 
 map.save_map ("Map.txt");
 
-map.paint ("Data.txt");
+map.paint ("Palet.txt");
 
 }
