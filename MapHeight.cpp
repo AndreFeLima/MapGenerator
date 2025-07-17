@@ -26,7 +26,7 @@
 
 int get_random(int number) {
     int limit = 2*number + 1;
-    
+
     int random = (rand () % (limit));
 
     return random - number;
@@ -173,22 +173,38 @@ void Map::diamond_square () {
 
     srand(time(NULL));
 
-    this -> heights [0] = get_random (100); 
+    int H1, H2, H3, H4;
 
-    this -> heights [(side-1)] = get_random (100);
+    H1 = get_random (1000); 
+
+    H2 = get_random (1000);
+
+    H3 = get_random (1000);
+
+    H4 = get_random (1000);
+
+    if (H1 <= 0 & H2 <= 0 & H3<=0 & H4<=0) {
+        H3 = 48;
+
+        H1 = 100;
+    }
+
+    this -> heights [0] = H1; 
+
+    this -> heights [(side-1)] = H2;
     
-    this -> heights [(side-1)*(side)] = get_random (100);
+    this -> heights [(side-1)*(side)] = H3;
 
-    this -> heights [(side-1)*(side) + (side-1)] = get_random (100);
+    this -> heights [(side-1)*(side) + (side-1)] = H4;
 
     int d = side - 1;
 
-    int roughness = (rand () % (10));
+    int roughness = (rand () % (700));
 
     while ( d > 1) {
         
-        diamond (heights, roughness, d, side); 
         square (heights, roughness, d, side); 
+        diamond (heights, roughness, d, side); 
 
         roughness /= 2;
         d /= 2; 
@@ -219,25 +235,30 @@ void Map::paint (std::string paleta) {
     ImagePPM image (side, side);
     Paleta colors;
 
-    colors.set_by_archive (paleta);
+    colors.set_by_file (paleta);
 
     for (int i = 0; i<(side*side); i++) {
         Color color;
         
         color = colors.get_color_by_height (heights[i]);
 
-        std::cout << color.R << ' '
-                << color.G << ' '
-                << color.B << ' '
-                << std::endl;
+        image.set_pixel (i/(side), i%(side), color);
 
-        image.set_pixel (i%(side*side), i/(side*side), color);
+        /*
+        Color pixel;
+        pixel = image.get_pixel (i/(side), i%(side));
+        std::cout << pixel.R <<  ' '
+                << pixel.G  <<  ' '
+                << pixel.B 
+                << std::endl; */
     }
 
     image.save ("image.ppm");
 }
 
-void Map::darken() {
+void Map::darken(ImagePPM image, int heights[]) {
+
+
 
 }
 
@@ -254,7 +275,7 @@ void Map::map_image (std::string paleta) {
 
 int main () {
 
-Map map (2); 
+Map map (10); 
 
 map.diamond_square ();
 

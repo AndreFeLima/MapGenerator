@@ -40,17 +40,22 @@ Paleta::~Paleta () {
 }
 
 Color Paleta::get_color_by_height (int height) {
-        for (int i = 0; i<size; i++) {
+        for (int i = 0; i< (size-1) ; i++) {
             if ( this -> heights[i] <= height && this -> heights[i + 1] > height) {return this -> colors[i];}
 
         }
+
+        if (size > 0 && height >= this->heights[size - 1]) {
+        return this->colors[size - 1];
+    }
+    
         return colors[0];
     }
 
 
     // PARA ARQUIVOS
 
-void Paleta::set_by_archive (std::string archive) {
+void Paleta::set_by_file (std::string archive) {
     std::ifstream arquivo (archive);
      if (arquivo.is_open()) {
         arquivo >> this -> size;

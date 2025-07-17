@@ -20,7 +20,7 @@ class Paleta {
 
     Color get_color_by_height (int height);
 
-    void set_by_archive (std::string arquive);
+    void set_by_file (std::string arquive);
     
 };
 
