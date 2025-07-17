@@ -42,7 +42,7 @@ int map_side (int n) {
     } 
     return (num + 1);}
 
-void Map::square (int *heights, int roughness, int d, int map_side) {
+void Map::diamond (int *heights, int roughness, int d, int map_side) {
 
     for (int r = 0; r < map_side - d; r += d ) {
         for (int c = 0; c < map_side - d; c += d) {
@@ -70,7 +70,7 @@ void Map::square (int *heights, int roughness, int d, int map_side) {
     }
     }
 
-void Map::diamond (int *heights, int roughness, int d, int map_side) {
+void Map::square (int *heights, int roughness, int d, int map_side) {
     int temp_d = d/2;
 
     for (int r = 0; r < map_side; r += temp_d) {
@@ -199,12 +199,12 @@ void Map::diamond_square () {
 
     int d = side - 1;
 
-    int roughness = (rand () % (700));
+    int roughness = (rand () % (600));
 
     while ( d > 1) {
         
-        square (heights, roughness, d, side); 
         diamond (heights, roughness, d, side); 
+        square (heights, roughness, d, side); 
 
         roughness /= 2;
         d /= 2; 
@@ -254,12 +254,6 @@ void Map::paint (std::string paleta) {
     }
 
     image.save ("image.ppm");
-}
-
-void Map::darken(ImagePPM image, int heights[]) {
-
-
-
 }
 
 

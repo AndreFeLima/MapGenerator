@@ -43,7 +43,7 @@ void map_image (std::string paleta);
 
 void paint (std::string paleta);
 
-void darken();
+void darken(ImagePPM image, int heights[]);
 
 };
 
