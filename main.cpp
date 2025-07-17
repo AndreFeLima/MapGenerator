@@ -12,6 +12,7 @@ int main () {
     int side;
     std::cout << "\nDigite o tamanho do mapa (O mapa terá dimensões 2^n + 1): ";
     std::cin >> side;
+    
     Map map (side);
 
     int roughness;

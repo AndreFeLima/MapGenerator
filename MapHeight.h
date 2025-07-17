@@ -56,14 +56,14 @@ int get_height (int line, int column);
 /// @param roughness Rugosidade 
 /// @param d Deslocamento
 /// @param map_side Lado do mapa
-void diamond (int *heights, int &roughness, int d, int map_side);
+void diamond (int *heights, int roughness, int d, int map_side);
 
 /// @brief Função que aplica o algorítmo Square;
 /// @param heightsMatriz de alturas do mapa;
 /// @param roughness Rugosidade; 
 /// @param d Deslocamento;
 /// @param map_side Lado do mapa;
-void square (int *heights, int &roughness, int d, int map_side);
+void square (int *heights, int roughness, int d, int map_side);
 
 /// @brief Função que junta as funções Diamond e Square;
 /// @param roughness Rugosidade que se deseja para a geração do terreno;

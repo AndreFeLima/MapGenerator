@@ -32,17 +32,16 @@ int get_random(int number) {
     return random - number;
 }
 
-
 int map_side (int n) {
     int temp = 0;
     int num = 1;
-    while (temp < n) {
+    while (temp < (n)) {
         num *= 2;
         temp ++;
     } 
     return (num + 1);}
 
-void Map::diamond (int *heights, int &roughness, int d, int map_side) {
+void Map::square (int *heights, int roughness, int d, int map_side) {
 
     for (int r = 0; r < map_side - d; r += d ) {
         for (int c = 0; c < map_side - d; c += d) {
@@ -70,7 +69,7 @@ void Map::diamond (int *heights, int &roughness, int d, int map_side) {
     }
     }
 
-void Map::square (int *heights, int &roughness, int d, int map_side) {
+void Map::diamond (int *heights, int roughness, int d, int map_side) {
     int temp_d = d/2;
 
     for (int r = 0; r < map_side; r += temp_d) {
@@ -94,12 +93,41 @@ void Map::square (int *heights, int &roughness, int d, int map_side) {
 
             //Verifica se algum ponto está fora da matriz:
             int out = 0;
-            
-            point_H = ((pH_r*map_side + pH_c < 0) || (pH_r*map_side + pH_c > (map_side*map_side - 1))) ? 0 && out++ : heights [pH_r*map_side + pH_c];
-            point_ML = ((pML_r*map_side + pML_c < 0) || (pML_r*map_side + pML_c > (map_side*map_side-1))) ? 0 && out++ : heights[pML_r*map_side + pML_c];
-            point_MR = ((pMR_r*map_side + pMR_c < 0) || (pMR_r*map_side + pMR_c > (map_side*map_side-1))) ? 0 && out++ : heights[pMR_r*map_side + pMR_c];
-            point_L = ((pL_r*map_side + pL_c < 0) || (pL_r*map_side + pL_c > (map_side*map_side-1))) ? 0 && out++ : heights [pL_r*map_side + pL_c];
 
+            if ((pH_r*map_side + pH_c < 0) || (pH_r*map_side + pH_c > (map_side*map_side - 1))) { 
+                point_H = 0;
+                out++;
+            }
+            else {
+                point_H = heights [pH_r*map_side + pH_c];
+            }
+
+
+            if ((pML_r*map_side + pML_c < 0) || (pML_r*map_side + pML_c > (map_side*map_side-1))) { 
+                point_ML = 0;
+                out++;
+            }
+            else {
+                point_ML = heights [pML_r*map_side + pML_c];
+            }
+
+
+            if ((pMR_r*map_side + pMR_c < 0) || (pMR_r*map_side + pMR_c > (map_side*map_side-1))) { 
+                point_MR = 0;
+                out++;
+            }
+            else {
+                point_MR = heights [pMR_r*map_side + pMR_c];
+            }
+
+
+            if ((pL_r*map_side + pL_c < 0) || (pL_r*map_side + pL_c > (map_side*map_side-1))) { 
+                point_L = 0;
+                out++;
+            }
+            else {
+                point_L = heights [pL_r*map_side + pL_c];
+            }
 
         long sum_heights = point_H + point_L + point_ML + point_MR;
             
@@ -108,10 +136,7 @@ void Map::square (int *heights, int &roughness, int d, int map_side) {
 
     }
 }
-
-
 }
-
 
 //CONSTRUTORES
 Map::Map () {
@@ -120,7 +145,7 @@ Map::Map () {
 };             
 
 Map::Map (int N) {
-    this -> side = map_side (N);
+    this -> side = map_side (N); 
 
     heights = new int [ ( this -> side ) * ( this -> side )];
 
@@ -170,7 +195,7 @@ void Map::set_map_from_archive (std::string archive) {
 
 //DIAMOND-SQUARE 
 void Map::diamond_square (int roughness) {
-
+    
     srand(time(NULL));
 
     int H1, H2, H3, H4;
@@ -195,14 +220,12 @@ void Map::diamond_square (int roughness) {
 
     while ( d > 1) {
         
-        diamond (heights, roughness, d, side); 
         square (heights, roughness, d, side); 
+        diamond (heights, roughness, d, side); 
 
         roughness /= 2;
         d /= 2; 
     }    
-
-
 
 }
 
@@ -235,14 +258,6 @@ void Map::paint (std::string paleta) {
         color = colors.get_color_by_height (heights[i]);
 
         image.set_pixel (i/(side), i%(side), color);
-
-        /*
-        Color pixel;
-        pixel = image.get_pixel (i/(side), i%(side));
-        std::cout << pixel.R <<  ' '
-                << pixel.G  <<  ' '
-                << pixel.B 
-                << std::endl; */
     }
 
     image.save ("image.ppm");
@@ -254,7 +269,7 @@ int main () {
 
 Map map (10); 
 
-map.diamond_square (500);
+map.diamond_square (900);
 
 map.save_map ("Map.txt");
 
