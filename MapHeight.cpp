@@ -210,7 +210,7 @@ void Map::darken(ImagePPM& image, int heights[])
 {
     int h = image.get_height();
     int w = image.get_width();
-    for (int r = 1; r < h; ++r)
+    for (int r = 1; r < h; ++r) {
         for (int c = 1; c < w; ++c)
         {
             int idx    = r * w + c;
@@ -224,7 +224,7 @@ void Map::darken(ImagePPM& image, int heights[])
                 image.set_pixel(r, c, px);          // grava
             }
         }
-}
+}}
 
 
 
